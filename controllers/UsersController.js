@@ -3,15 +3,23 @@ import DBClient from '../utils/db';
 
 class UsersController {
   static async postNew(request, response) {
-    const email = request.body ? request.body.email : null;
-    console.log(request);
+    let bodyData = '';
+    request.on('data', (chunk) => {
+      bodyData += chunk;
+    });
+    await bodyData;
+    const parsed = JSON.parse(bodyData);
+    const { email } = parsed;
+    console.log(bodyData);
+    console.log(parsed);
+    console.log(email);
     if (!email) {
       const status = { error: 'Missing email' };
       response.status(400).json(status);
       return;
     }
 
-    const password = request.body ? request.body.password : null;
+    const { password } = parsed;
     if (!password) {
       const status = { error: 'Missing password' };
       response.status(400).json(status);
