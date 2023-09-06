@@ -5,19 +5,13 @@ import redisClient from '../utils/redis';
 
 class UsersController {
   static async postNew(request, response) {
-    let bodyData = '';
-    request.on('data', (chunk) => {
-      bodyData += chunk;
-    });
-    await bodyData;
-    const parsed = JSON.parse(bodyData);
-    const { email } = parsed;
+    const email = request.body.email || null;
     if (!email) {
       response.status(400).json({ error: 'Missing email' });
       return;
     }
 
-    const { password } = parsed;
+    const password = request.body.password || null;
     if (!password) {
       response.status(400).json({ error: 'Missing password' });
       return;
