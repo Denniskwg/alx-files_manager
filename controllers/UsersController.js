@@ -1,5 +1,5 @@
 import sha1 from 'sha1';
-import DBClient from '../utils/db';
+import dbClient from '../utils/db';
 
 class UsersController {
   static async postNew(request, response) {
@@ -22,7 +22,7 @@ class UsersController {
       response.status(400).json(status);
       return;
     }
-    const collection = DBClient.client.db().collection('users');
+    const collection = dbClient.client.db().collection('users');
 
     const existingUser = await collection.findOne({ email });
     if (existingUser) {
