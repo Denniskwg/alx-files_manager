@@ -7,21 +7,18 @@ class UsersController {
   static async postNew(request, response) {
     const email = request.body.email || null;
     if (!email) {
-      response.status(400).json({ error: 'Missing email' });
-      return;
+      return response.status(400).json({ error: 'Missing email' });
     }
 
     const password = request.body.password || null;
     if (!password) {
-      response.status(400).json({ error: 'Missing password' });
-      return;
+      return response.status(400).json({ error: 'Missing password' });
     }
     const collection = dbClient.client.db().collection('users');
 
     const existingUser = await collection.findOne({ email });
     if (existingUser) {
-      response.status(400).json({ error: 'Already exist' });
-      return;
+      return response.status(400).json({ error: 'Already exist' });
     }
 
     const data = await collection.insertOne({ email, password: sha1(password) });
@@ -36,10 +33,9 @@ class UsersController {
     const collection = dbClient.client.db().collection('users');
     const existingUser = await collection.findOne({ _id: new ObjectId(id) });
     if (!existingUser) {
-      response.status(401).json({ error: 'Unauthorized' });
-      return;
+      return response.status(401).json({ error: 'Unauthorized' });
     }
-    response.json({ email: existingUser.email, id: existingUser._id.toString() });
+    return response.json({ email: existingUser.email, id: existingUser._id.toString() });
   }
 }
 
