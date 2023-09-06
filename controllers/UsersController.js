@@ -10,9 +10,6 @@ class UsersController {
     await bodyData;
     const parsed = JSON.parse(bodyData);
     const { email } = parsed;
-    console.log(bodyData);
-    console.log(parsed);
-    console.log(email);
     if (!email) {
       const status = { error: 'Missing email' };
       response.status(400).json(status);
