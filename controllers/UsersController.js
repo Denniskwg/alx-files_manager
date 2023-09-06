@@ -14,7 +14,7 @@ class UsersController {
     if (!password) {
       return response.status(400).json({ error: 'Missing password' });
     }
-    const collection = dbClient.client.db().collection('users');
+    const collection = await dbClient.client.db().collection('users');
 
     const existingUser = await collection.findOne({ email });
     if (existingUser) {

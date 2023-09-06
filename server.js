@@ -3,7 +3,7 @@ import Routes from './routes';
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '200mb' }));
 
 const port = process.env.port || '5000';
 
