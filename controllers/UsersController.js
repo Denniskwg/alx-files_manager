@@ -22,7 +22,7 @@ class UsersController {
     }
 
     const data = await collection.insertOne({ email, password: sha1(password) });
-    const userId = data._id.toString();
+    const userId = data.insertedId.toString();
     return response.status(201).json({ email, id: userId });
   }
 
