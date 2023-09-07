@@ -7,7 +7,13 @@ class AuthController {
   static async getConnect(request, response) {
     const { authorization } = request.headers;
     const base64Credentials = authorization.split(' ')[1];
-    const credentials = atob(base64Credentials);
+    let credentials = null;
+    try {
+      credentials = await atob(base64Credentials);
+    } catch(err) {
+      response.status(401).json({ error: 'Unauthorized' });
+      return;
+    }
     const [email, password] = credentials.split(':');
     const collection = dbClient.client.db().collection('users');
     const existingUser = await collection.findOne({ email, password: sha1(password) });
