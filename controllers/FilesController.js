@@ -19,8 +19,7 @@ class FilesController {
     const dataBody = request.body;
     const name = dataBody.name || null;
     if (!name) {
-      response.status(400).json({ error: 'Missing name' });
-      return;
+      return response.status(400).json({ error: 'Missing name' });
     }
     const type = dataBody.type || null;
     const arr = ['folder', 'file', 'image'];
@@ -37,13 +36,13 @@ class FilesController {
     }
     const collection2 = dbClient.client.db().collection('files');
     if (parentId !== 0) {
-      const existingFile = await collection2.findOne({ parentId: new ObjectId(parentId) });
+      const existingFile = await collection2.findOne({ _id: new ObjectId(parentId) });
       if (!existingFile) {
         response.status(400).json({ error: 'Parent not found' });
         return;
       }
       if (existingFile.type !== 'folder') {
-        response.status(400).json({ error: 'Parent not found' });
+        response.status(400).json({ error: 'Parent is not a folder' });
         return;
       }
     }
