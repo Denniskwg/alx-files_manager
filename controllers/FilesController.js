@@ -78,7 +78,6 @@ class FilesController {
     let currentDirectory = '/';
     for (const folder of folders) {
       currentDirectory = path.join(currentDirectory, folder);
-      console.log(currentDirectory);
       if (!fs.existsSync(currentDirectory)) {
         fs.mkdirSync(currentDirectory);
       }
