@@ -10,7 +10,7 @@ class AuthController {
     let credentials = null;
     try {
       credentials = await atob(base64Credentials);
-    } catch(err) {
+    } catch (err) {
       response.status(401).json({ error: 'Unauthorized' });
       return;
     }

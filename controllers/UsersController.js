@@ -1,5 +1,5 @@
 import sha1 from 'sha1';
-import { ObjectId } from 'mongodb';
+import { ObjectID } from 'mongodb';
 import dbClient from '../utils/db';
 import redisClient from '../utils/redis';
 
@@ -34,7 +34,7 @@ class UsersController {
     const key = `auth_${token}`;
     const id = await redisClient.get(key);
     const collection = dbClient.client.db().collection('users');
-    const existingUser = await collection.findOne({ _id: new ObjectId(id) });
+    const existingUser = await collection.findOne({ _id: new ObjectID(id) });
     if (!existingUser) {
       response.status(401).json({ error: 'Unauthorized' });
       return;
