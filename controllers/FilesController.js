@@ -5,7 +5,7 @@ import path from 'path';
 import redisClient from '../utils/redis';
 import dbClient from '../utils/db';
 
-class FilesController {
+export default class FilesController {
   static async postUpload(request, response) {
     const token = request.headers['x-token'];
     const key = `auth_${token}`;
@@ -106,5 +106,3 @@ class FilesController {
     response.status(201).json(returnObj);
   }
 }
-
-module.exports = FilesController;

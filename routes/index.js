@@ -13,4 +13,4 @@ const Routes = (api) => {
   api.get('/users/me', UsersController.getMe);
 };
 
-module.exports = Routes;
+export default Routes;

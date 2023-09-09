@@ -3,7 +3,7 @@ import { ObjectID } from 'mongodb';
 import dbClient from '../utils/db';
 import redisClient from '../utils/redis';
 
-class UsersController {
+export default class UsersController {
   static async postNew(request, response) {
     const email = request.body.email || null;
     if (!email) {
@@ -42,5 +42,3 @@ class UsersController {
     response.json({ email: existingUser.email, id: existingUser._id.toString() });
   }
 }
-
-module.exports = UsersController;

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import dbClient from '../utils/db';
 import redisClient from '../utils/redis';
 
-class AuthController {
+export default class AuthController {
   static async getConnect(request, response) {
     const { authorization } = request.headers;
     const base64Credentials = authorization.split(' ')[1];
@@ -40,5 +40,3 @@ class AuthController {
     return response.status(204).end();
   }
 }
-
-module.exports = AuthController;
