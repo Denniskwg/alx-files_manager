@@ -19,7 +19,8 @@ class FilesController {
     const dataBody = request.body;
     const name = dataBody.name || null;
     if (!name) {
-      return response.status(400).json({ error: 'Missing name' });
+      response.status(400).json({ error: 'Missing name' });
+      return;
     }
     const type = dataBody.type || null;
     const arr = ['folder', 'file', 'image'];
